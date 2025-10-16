@@ -65,7 +65,7 @@ const TicketDetail = () => {
   const analyzeTicket = async () => {
     try {
       setAnalyzing(true);
-      const response = await fetch(`http://localhost:8002/api/v1/tickets/${ticketId}/analyze`, {
+      const response = await fetch(`http://localhost:8001/api/v1/tickets/${ticketId}/analyze`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

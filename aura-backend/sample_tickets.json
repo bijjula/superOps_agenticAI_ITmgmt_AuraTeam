@@ -4,11 +4,11 @@
     "description": "My laptop screen has been flickering on and off for the past two days. It happens randomly, sometimes when I'm typing, sometimes when I'm just reading. The flickering lasts for about 5-10 seconds and then stops. I've tried restarting the laptop but the issue persists.",
     "category": "Hardware",
     "priority": "high",
-    "status": "in_progress",
-    "user_id": "USR70177",
-    "user_email": "emily.davis@company.com",
-    "user_name": "Emily Davis",
-    "department": "Finance",
+    "status": "open",
+    "user_id": "USR80604",
+    "user_email": "rebecca.walker@company.com",
+    "user_name": "Rebecca Walker",
+    "department": "HR",
     "attachments": [],
     "ai_suggestions": [
       {
@@ -17,9 +17,8 @@
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-09-29T12:21:18.500162",
-    "updated_at": "2025-09-29T12:21:18.500162",
-    "assigned_to": "Bob Smith"
+    "created_at": "2025-10-13T21:19:23.009766",
+    "updated_at": "2025-10-13T21:19:23.009766"
   },
   {
     "title": "Unable to access company VPN from home",
@@ -27,9 +26,9 @@
     "category": "Network",
     "priority": "high",
     "status": "open",
-    "user_id": "USR93126",
-    "user_email": "kevin.hall@company.com",
-    "user_name": "Kevin Hall",
+    "user_id": "USR41480",
+    "user_email": "william.brown@company.com",
+    "user_name": "William Brown",
     "department": "Customer Support",
     "attachments": [],
     "ai_suggestions": [
@@ -39,19 +38,19 @@
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-09-25T12:21:18.500552",
-    "updated_at": "2025-09-25T12:21:18.500552"
+    "created_at": "2025-09-18T06:19:23.010056",
+    "updated_at": "2025-09-18T06:19:23.010056"
   },
   {
     "title": "Microsoft Excel crashes when opening large spreadsheets",
     "description": "Excel keeps crashing whenever I try to open files larger than 50MB. The application starts to load the file and then suddenly closes without any error message. I need to work with these large datasets for my quarterly reports.",
     "category": "Software",
     "priority": "medium",
-    "status": "open",
-    "user_id": "USR53817",
-    "user_email": "daniel.lewis@company.com",
-    "user_name": "Daniel Lewis",
-    "department": "Product Management",
+    "status": "resolved",
+    "user_id": "USR86506",
+    "user_email": "lisa.anderson@company.com",
+    "user_name": "Lisa Anderson",
+    "department": "Finance",
     "attachments": [],
     "ai_suggestions": [
       {
@@ -60,411 +59,18 @@
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-10-02T05:21:18.500560",
-    "updated_at": "2025-10-02T05:21:18.500560"
+    "created_at": "2025-09-15T19:19:23.010070",
+    "updated_at": "2025-09-17T02:19:23.010070",
+    "assigned_to": "Dave Brown",
+    "resolution": "Issue resolved through hardware replacement and configuration update."
   },
   {
     "title": "Request access to SharePoint site for new project",
     "description": "I've been assigned to the 'Project Phoenix' team and need access to the SharePoint site. My manager mentioned I should have read/write permissions to the documents folder and read-only access to the finance folder.",
     "category": "Access",
     "priority": "medium",
-    "status": "in_progress",
-    "user_id": "USR74816",
-    "user_email": "william.brown@company.com",
-    "user_name": "William Brown",
-    "department": "Operations",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Access' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-03T13:21:18.500566",
-    "updated_at": "2025-10-03T13:21:18.500566",
-    "assigned_to": "Eva Davis"
-  },
-  {
-    "title": "Email attachments not downloading in Outlook",
-    "description": "When I try to download email attachments in Outlook, I get an error saying 'Temporary error, please try again later'. This has been happening for the past 3 hours. I can see the attachments are there but cannot save them to my computer.",
-    "category": "Email",
-    "priority": "high",
-    "status": "in_progress",
-    "user_id": "USR70019",
-    "user_email": "sandra.scott@company.com",
-    "user_name": "Sandra Scott",
-    "department": "Customer Support",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Email' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-22T12:21:18.500571",
-    "updated_at": "2025-09-22T12:21:18.500571",
-    "assigned_to": "Dave Brown"
-  },
-  {
-    "title": "Printer not responding - urgent documents needed",
-    "description": "The printer on the 3rd floor (HP LaserJet Pro) is not responding to print jobs. The printer shows as online in Windows but nothing happens when I try to print. I have important contracts that need to be printed for a client meeting in 2 hours.",
-    "category": "Hardware",
-    "priority": "critical",
-    "status": "in_progress",
-    "user_id": "USR52808",
-    "user_email": "rebecca.walker@company.com",
-    "user_name": "Rebecca Walker",
-    "department": "Sales",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Hardware' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-28T00:21:18.500575",
-    "updated_at": "2025-09-28T00:21:18.500575",
-    "assigned_to": "Bob Smith"
-  },
-  {
-    "title": "Slow internet connection affecting video calls",
-    "description": "My internet connection has been very slow for the past few days. Video calls keep dropping and websites take forever to load. Speed test shows only 2 Mbps download when it should be at least 50 Mbps. This is affecting my ability to attend virtual meetings.",
-    "category": "Network",
-    "priority": "high",
-    "status": "in_progress",
-    "user_id": "USR83229",
-    "user_email": "jennifer.martinez@company.com",
-    "user_name": "Jennifer Martinez",
-    "department": "HR",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Network' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-22T08:21:18.500579",
-    "updated_at": "2025-09-22T08:21:18.500579",
-    "assigned_to": "Bob Smith"
-  },
-  {
-    "title": "Cannot install required software - admin rights needed",
-    "description": "I need to install Adobe Creative Suite for a new marketing campaign but I don't have administrator rights on my computer. I get an error message saying 'Installation failed - insufficient privileges'. Can someone help me install this software?",
-    "category": "Software",
-    "priority": "medium",
-    "status": "in_progress",
-    "user_id": "USR26085",
-    "user_email": "william.brown@company.com",
-    "user_name": "William Brown",
-    "department": "Product Management",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Software' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-25T11:21:18.500583",
-    "updated_at": "2025-09-25T11:21:18.500583",
-    "assigned_to": "Carol Williams"
-  },
-  {
-    "title": "Password reset for domain account",
-    "description": "I forgot my domain password and need it reset. I tried the self-service portal but it says my security questions don't match. My username is jsmith and I need access urgently as I have a presentation at 2 PM today.",
-    "category": "Access",
-    "priority": "high",
     "status": "open",
-    "user_id": "USR98240",
-    "user_email": "karen.king@company.com",
-    "user_name": "Karen King",
-    "department": "HR",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Access' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-07T11:21:18.500587",
-    "updated_at": "2025-10-07T11:21:18.500587"
-  },
-  {
-    "title": "Spam emails getting through to inbox",
-    "description": "I've been receiving a lot of spam emails in my inbox over the past week. The emails are clearly spam (offers for fake products, lottery winnings, etc.) but they're not being caught by the spam filter. Can the email security be adjusted?",
-    "category": "Email",
-    "priority": "low",
-    "status": "open",
-    "user_id": "USR59344",
-    "user_email": "jessica.taylor@company.com",
-    "user_name": "Jessica Taylor",
-    "department": "Legal",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Email' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-16T11:21:18.500591",
-    "updated_at": "2025-10-16T11:21:18.500591"
-  },
-  {
-    "title": "Computer running very slowly - possible malware",
-    "description": "My computer has become extremely slow over the past few days. Programs take minutes to open and the fan is constantly running. I suspect there might be malware. Can someone run a security scan and help clean up my system?",
-    "category": "Other",
-    "priority": "high",
-    "status": "in_progress",
-    "user_id": "USR52019",
-    "user_email": "william.brown@company.com",
-    "user_name": "William Brown",
-    "department": "IT",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Other' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-12T05:21:18.500595",
-    "updated_at": "2025-10-12T05:21:18.500595",
-    "assigned_to": "Alice Johnson"
-  },
-  {
-    "title": "External monitor not detected by laptop",
-    "description": "I'm trying to connect my external monitor to my laptop using the HDMI cable but it's not being detected. I've tried different cables and ports but nothing works. The monitor works fine with other devices.",
-    "category": "Hardware",
-    "priority": "medium",
-    "status": "open",
-    "user_id": "USR60961",
-    "user_email": "amanda.white@company.com",
-    "user_name": "Amanda White",
-    "department": "Operations",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Hardware' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-26T08:21:18.500599",
-    "updated_at": "2025-09-26T08:21:18.500599"
-  },
-  {
-    "title": "Teams application keeps freezing during meetings",
-    "description": "Microsoft Teams freezes frequently during video conferences. The audio continues but the video becomes unresponsive and I have to restart the application. This is very disruptive during important client calls.",
-    "category": "Software",
-    "priority": "high",
-    "status": "resolved",
-    "user_id": "USR63536",
-    "user_email": "nancy.lopez@company.com",
-    "user_name": "Nancy Lopez",
-    "department": "Product Management",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Software' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-29T02:21:18.500603",
-    "updated_at": "2025-09-29T07:21:18.500603",
-    "assigned_to": "Dave Brown",
-    "resolution": "Resolved by reinstalling the application and configuring permissions."
-  },
-  {
-    "title": "WiFi connection dropping every 30 minutes",
-    "description": "My WiFi connection keeps dropping every 30 minutes or so. I have to disconnect and reconnect to get back online. This started happening after the recent Windows update. Other devices in the office seem to work fine.",
-    "category": "Network",
-    "priority": "medium",
-    "status": "open",
-    "user_id": "USR43600",
-    "user_email": "karen.king@company.com",
-    "user_name": "Karen King",
-    "department": "Engineering",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Network' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-15T01:21:18.500609",
-    "updated_at": "2025-10-15T01:21:18.500609"
-  },
-  {
-    "title": "Need access to CRM system for new sales role",
-    "description": "I've just started in the sales team and need access to the Salesforce CRM system. My manager said I should have full access to leads and opportunities. My employee ID is EMP001234.",
-    "category": "Access",
-    "priority": "medium",
-    "status": "in_progress",
-    "user_id": "USR61455",
-    "user_email": "david.wilson@company.com",
-    "user_name": "David Wilson",
-    "department": "Operations",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Access' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-16T07:21:18.500612",
-    "updated_at": "2025-10-16T07:21:18.500612",
-    "assigned_to": "Bob Smith"
-  },
-  {
-    "title": "Email signature not updating across all devices",
-    "description": "I updated my email signature last week but it's not showing the changes on my mobile phone. The signature appears correctly on my desktop Outlook but shows the old version on my iPhone. How can I sync this?",
-    "category": "Email",
-    "priority": "low",
-    "status": "resolved",
-    "user_id": "USR35757",
-    "user_email": "christopher.harris@company.com",
-    "user_name": "Christopher Harris",
-    "department": "Sales",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Email' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-24T17:21:18.500616",
-    "updated_at": "2025-09-25T19:21:18.500616",
-    "assigned_to": "Alice Johnson",
-    "resolution": "Issue resolved through hardware replacement and configuration update."
-  },
-  {
-    "title": "Request for new software license - CAD software",
-    "description": "Our engineering team needs an additional license for AutoCAD software. We have a new engineer starting next week and they'll need access to work on client projects. Can we purchase and install an additional license?",
-    "category": "Software",
-    "priority": "medium",
-    "status": "open",
-    "user_id": "USR49009",
-    "user_email": "jessica.taylor@company.com",
-    "user_name": "Jessica Taylor",
-    "department": "Finance",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Software' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-04T03:21:18.500622",
-    "updated_at": "2025-10-04T03:21:18.500622"
-  },
-  {
-    "title": "Keyboard keys sticking - affecting productivity",
-    "description": "Several keys on my keyboard are sticking, particularly the space bar and the 'e' key. This is making typing very difficult and slowing down my work. I've tried cleaning it but the problem persists.",
-    "category": "Hardware",
-    "priority": "medium",
-    "status": "resolved",
-    "user_id": "USR67971",
-    "user_email": "sarah.johnson@company.com",
-    "user_name": "Sarah Johnson",
-    "department": "Customer Support",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Hardware' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-09-22T09:21:18.500626",
-    "updated_at": "2025-09-22T15:21:18.500626",
-    "assigned_to": "Bob Smith",
-    "resolution": "Fixed by updating software and running system diagnostics."
-  },
-  {
-    "title": "Cannot connect to shared network drive",
-    "description": "I'm unable to access the shared network drive (S: drive) that contains our department's project files. I get an error message 'Network path not found'. Other colleagues can access it fine. I need these files for tomorrow's deadline.",
-    "category": "Network",
-    "priority": "high",
-    "status": "open",
-    "user_id": "USR59913",
-    "user_email": "michelle.clark@company.com",
-    "user_name": "Michelle Clark",
-    "department": "Operations",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Network' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-14T13:21:18.500631",
-    "updated_at": "2025-10-14T13:21:18.500631"
-  },
-  {
-    "title": "File permissions issue - cannot edit shared documents",
-    "description": "I can open shared documents in our team folder but cannot edit or save changes. I get a 'Permission denied' error when trying to save. I had edit permissions last month but something seems to have changed.",
-    "category": "Access",
-    "priority": "medium",
-    "status": "closed",
-    "user_id": "USR65416",
-    "user_email": "jennifer.martinez@company.com",
-    "user_name": "Jennifer Martinez",
-    "department": "Marketing",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Access' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-02T16:21:18.500635",
-    "updated_at": "2025-10-02T21:21:18.500635",
-    "assigned_to": "Carol Williams",
-    "resolution": "Resolved by reinstalling the application and configuring permissions."
-  },
-  {
-    "title": "Email not syncing with mobile device",
-    "description": "My work emails are not syncing with my company phone. I receive emails on my desktop but they don't show up on my mobile device. I've tried removing and re-adding the account but the issue persists. The sync was working fine until yesterday.",
-    "category": "Email",
-    "priority": "medium",
-    "status": "resolved",
-    "user_id": "USR88456",
-    "user_email": "robert.garcia@company.com",
-    "user_name": "Robert Garcia",
-    "department": "Finance",
-    "attachments": [],
-    "ai_suggestions": [
-      {
-        "type": "category_confidence",
-        "content": "Automatically categorized as 'Email' with 95% confidence",
-        "confidence": 0.95
-      }
-    ],
-    "created_at": "2025-10-13T05:21:18.500640",
-    "updated_at": "2025-10-13T20:21:18.500640",
-    "assigned_to": "Bob Smith",
-    "resolution": "Resolved by reinstalling the application and configuring permissions."
-  },
-  {
-    "title": "Blue Screen of Death (BSOD) occurring randomly",
-    "description": "My computer has been experiencing Blue Screen of Death errors randomly throughout the day. There's no specific pattern - it happens when I'm using different applications. The error code is usually SYSTEM_SERVICE_EXCEPTION. This is affecting my ability to work.",
-    "category": "Other",
-    "priority": "critical",
-    "status": "in_progress",
-    "user_id": "USR86490",
+    "user_id": "USR87882",
     "user_email": "laura.allen@company.com",
     "user_name": "Laura Allen",
     "department": "Customer Support",
@@ -472,46 +78,68 @@
     "ai_suggestions": [
       {
         "type": "category_confidence",
-        "content": "Automatically categorized as 'Other' with 95% confidence",
+        "content": "Automatically categorized as 'Access' with 95% confidence",
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-10-16T10:21:18.500645",
-    "updated_at": "2025-10-16T10:21:18.500645",
-    "assigned_to": "Eva Davis"
+    "created_at": "2025-10-11T09:19:23.010081",
+    "updated_at": "2025-10-11T09:19:23.010081"
   },
   {
-    "title": "Software update stuck at 50% - system unusable",
-    "description": "A Windows update started this morning and has been stuck at 50% for over 3 hours. I cannot cancel it or use my computer. I have important work to complete today and need this resolved urgently.",
-    "category": "Software",
-    "priority": "critical",
+    "title": "Email attachments not downloading in Outlook",
+    "description": "When I try to download email attachments in Outlook, I get an error saying 'Temporary error, please try again later'. This has been happening for the past 3 hours. I can see the attachments are there but cannot save them to my computer.",
+    "category": "Email",
+    "priority": "high",
     "status": "in_progress",
-    "user_id": "USR67876",
-    "user_email": "karen.king@company.com",
-    "user_name": "Karen King",
-    "department": "Finance",
+    "user_id": "USR68619",
+    "user_email": "christopher.harris@company.com",
+    "user_name": "Christopher Harris",
+    "department": "Marketing",
     "attachments": [],
     "ai_suggestions": [
       {
         "type": "category_confidence",
-        "content": "Automatically categorized as 'Software' with 95% confidence",
+        "content": "Automatically categorized as 'Email' with 95% confidence",
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-10-13T02:21:18.500649",
-    "updated_at": "2025-10-13T02:21:18.500649",
-    "assigned_to": "Bob Smith"
+    "created_at": "2025-09-18T22:19:23.010088",
+    "updated_at": "2025-09-18T22:19:23.010088",
+    "assigned_to": "Carol Williams"
   },
   {
-    "title": "VPN connection very slow - remote work impacted",
-    "description": "When I connect to the company VPN, my internet speed drops significantly. File transfers that normally take minutes are taking hours. This is making remote work very difficult, especially when accessing cloud applications.",
+    "title": "Printer not responding - urgent documents needed",
+    "description": "The printer on the 3rd floor (HP LaserJet Pro) is not responding to print jobs. The printer shows as online in Windows but nothing happens when I try to print. I have important contracts that need to be printed for a client meeting in 2 hours.",
+    "category": "Hardware",
+    "priority": "critical",
+    "status": "resolved",
+    "user_id": "USR12198",
+    "user_email": "amanda.white@company.com",
+    "user_name": "Amanda White",
+    "department": "IT",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Hardware' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-03T07:19:23.010095",
+    "updated_at": "2025-10-04T11:19:23.010095",
+    "assigned_to": "Bob Smith",
+    "resolution": "Resolved by reinstalling the application and configuring permissions."
+  },
+  {
+    "title": "Slow internet connection affecting video calls",
+    "description": "My internet connection has been very slow for the past few days. Video calls keep dropping and websites take forever to load. Speed test shows only 2 Mbps download when it should be at least 50 Mbps. This is affecting my ability to attend virtual meetings.",
     "category": "Network",
     "priority": "high",
-    "status": "open",
-    "user_id": "USR11064",
-    "user_email": "daniel.lewis@company.com",
-    "user_name": "Daniel Lewis",
-    "department": "Product Management",
+    "status": "in_progress",
+    "user_id": "USR79006",
+    "user_email": "mark.hill@company.com",
+    "user_name": "Mark Hill",
+    "department": "Finance",
     "attachments": [],
     "ai_suggestions": [
       {
@@ -520,19 +148,43 @@
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-10-16T02:21:18.500653",
-    "updated_at": "2025-10-16T02:21:18.500653"
+    "created_at": "2025-10-08T06:19:23.010103",
+    "updated_at": "2025-10-08T06:19:23.010103",
+    "assigned_to": "Dave Brown"
   },
   {
-    "title": "Request deactivation of former employee accounts",
-    "description": "We need to deactivate all system accounts for John Doe who left the company last Friday. This includes Active Directory, email, VPN access, and any application-specific accounts. His employee ID was EMP005678. Please confirm when this is completed.",
+    "title": "Cannot install required software - admin rights needed",
+    "description": "I need to install Adobe Creative Suite for a new marketing campaign but I don't have administrator rights on my computer. I get an error message saying 'Installation failed - insufficient privileges'. Can someone help me install this software?",
+    "category": "Software",
+    "priority": "medium",
+    "status": "resolved",
+    "user_id": "USR69556",
+    "user_email": "thomas.wright@company.com",
+    "user_name": "Thomas Wright",
+    "department": "HR",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Software' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-12T11:19:23.010109",
+    "updated_at": "2025-10-13T10:19:23.010109",
+    "assigned_to": "Eva Davis",
+    "resolution": "Fixed by updating software and running system diagnostics."
+  },
+  {
+    "title": "Password reset for domain account",
+    "description": "I forgot my domain password and need it reset. I tried the self-service portal but it says my security questions don't match. My username is jsmith and I need access urgently as I have a presentation at 2 PM today.",
     "category": "Access",
     "priority": "high",
     "status": "in_progress",
-    "user_id": "USR13741",
-    "user_email": "emily.davis@company.com",
-    "user_name": "Emily Davis",
-    "department": "Operations",
+    "user_id": "USR77130",
+    "user_email": "james.lee@company.com",
+    "user_name": "James Lee",
+    "department": "Sales",
     "attachments": [],
     "ai_suggestions": [
       {
@@ -541,8 +193,358 @@
         "confidence": 0.95
       }
     ],
-    "created_at": "2025-09-20T00:21:18.500658",
-    "updated_at": "2025-09-20T00:21:18.500658",
+    "created_at": "2025-10-08T03:19:23.010117",
+    "updated_at": "2025-10-08T03:19:23.010117",
     "assigned_to": "Bob Smith"
+  },
+  {
+    "title": "Spam emails getting through to inbox",
+    "description": "I've been receiving a lot of spam emails in my inbox over the past week. The emails are clearly spam (offers for fake products, lottery winnings, etc.) but they're not being caught by the spam filter. Can the email security be adjusted?",
+    "category": "Email",
+    "priority": "low",
+    "status": "open",
+    "user_id": "USR83119",
+    "user_email": "christopher.harris@company.com",
+    "user_name": "Christopher Harris",
+    "department": "HR",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Email' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-26T18:19:23.010123",
+    "updated_at": "2025-09-26T18:19:23.010123"
+  },
+  {
+    "title": "Computer running very slowly - possible malware",
+    "description": "My computer has become extremely slow over the past few days. Programs take minutes to open and the fan is constantly running. I suspect there might be malware. Can someone run a security scan and help clean up my system?",
+    "category": "Other",
+    "priority": "high",
+    "status": "open",
+    "user_id": "USR56385",
+    "user_email": "thomas.wright@company.com",
+    "user_name": "Thomas Wright",
+    "department": "Product Management",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Other' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-21T00:19:23.010128",
+    "updated_at": "2025-09-21T00:19:23.010128"
+  },
+  {
+    "title": "External monitor not detected by laptop",
+    "description": "I'm trying to connect my external monitor to my laptop using the HDMI cable but it's not being detected. I've tried different cables and ports but nothing works. The monitor works fine with other devices.",
+    "category": "Hardware",
+    "priority": "medium",
+    "status": "open",
+    "user_id": "USR41957",
+    "user_email": "james.lee@company.com",
+    "user_name": "James Lee",
+    "department": "Product Management",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Hardware' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-19T11:19:23.010133",
+    "updated_at": "2025-09-19T11:19:23.010133"
+  },
+  {
+    "title": "Teams application keeps freezing during meetings",
+    "description": "Microsoft Teams freezes frequently during video conferences. The audio continues but the video becomes unresponsive and I have to restart the application. This is very disruptive during important client calls.",
+    "category": "Software",
+    "priority": "high",
+    "status": "open",
+    "user_id": "USR92088",
+    "user_email": "nancy.lopez@company.com",
+    "user_name": "Nancy Lopez",
+    "department": "Operations",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Software' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-19T21:19:23.010139",
+    "updated_at": "2025-09-19T21:19:23.010139"
+  },
+  {
+    "title": "WiFi connection dropping every 30 minutes",
+    "description": "My WiFi connection keeps dropping every 30 minutes or so. I have to disconnect and reconnect to get back online. This started happening after the recent Windows update. Other devices in the office seem to work fine.",
+    "category": "Network",
+    "priority": "medium",
+    "status": "in_progress",
+    "user_id": "USR80939",
+    "user_email": "james.lee@company.com",
+    "user_name": "James Lee",
+    "department": "Finance",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Network' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-07T11:19:23.010144",
+    "updated_at": "2025-10-07T11:19:23.010144",
+    "assigned_to": "Dave Brown"
+  },
+  {
+    "title": "Need access to CRM system for new sales role",
+    "description": "I've just started in the sales team and need access to the Salesforce CRM system. My manager said I should have full access to leads and opportunities. My employee ID is EMP001234.",
+    "category": "Access",
+    "priority": "medium",
+    "status": "resolved",
+    "user_id": "USR20636",
+    "user_email": "karen.king@company.com",
+    "user_name": "Karen King",
+    "department": "Customer Support",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Access' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-21T03:19:23.010150",
+    "updated_at": "2025-09-22T13:19:23.010150",
+    "assigned_to": "Alice Johnson",
+    "resolution": "Resolved by reinstalling the application and configuring permissions."
+  },
+  {
+    "title": "Email signature not updating across all devices",
+    "description": "I updated my email signature last week but it's not showing the changes on my mobile phone. The signature appears correctly on my desktop Outlook but shows the old version on my iPhone. How can I sync this?",
+    "category": "Email",
+    "priority": "low",
+    "status": "in_progress",
+    "user_id": "USR36101",
+    "user_email": "john.smith@company.com",
+    "user_name": "John Smith",
+    "department": "Sales",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Email' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-29T00:19:23.010169",
+    "updated_at": "2025-09-29T00:19:23.010169",
+    "assigned_to": "Bob Smith"
+  },
+  {
+    "title": "Request for new software license - CAD software",
+    "description": "Our engineering team needs an additional license for AutoCAD software. We have a new engineer starting next week and they'll need access to work on client projects. Can we purchase and install an additional license?",
+    "category": "Software",
+    "priority": "medium",
+    "status": "in_progress",
+    "user_id": "USR26356",
+    "user_email": "christopher.harris@company.com",
+    "user_name": "Christopher Harris",
+    "department": "Engineering",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Software' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-30T17:19:23.010174",
+    "updated_at": "2025-09-30T17:19:23.010174",
+    "assigned_to": "Eva Davis"
+  },
+  {
+    "title": "Keyboard keys sticking - affecting productivity",
+    "description": "Several keys on my keyboard are sticking, particularly the space bar and the 'e' key. This is making typing very difficult and slowing down my work. I've tried cleaning it but the problem persists.",
+    "category": "Hardware",
+    "priority": "medium",
+    "status": "in_progress",
+    "user_id": "USR38904",
+    "user_email": "john.smith@company.com",
+    "user_name": "John Smith",
+    "department": "Engineering",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Hardware' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-12T23:19:23.010180",
+    "updated_at": "2025-10-12T23:19:23.010180",
+    "assigned_to": "Bob Smith"
+  },
+  {
+    "title": "Cannot connect to shared network drive",
+    "description": "I'm unable to access the shared network drive (S: drive) that contains our department's project files. I get an error message 'Network path not found'. Other colleagues can access it fine. I need these files for tomorrow's deadline.",
+    "category": "Network",
+    "priority": "high",
+    "status": "resolved",
+    "user_id": "USR24040",
+    "user_email": "james.lee@company.com",
+    "user_name": "James Lee",
+    "department": "Operations",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Network' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-18T11:19:23.010185",
+    "updated_at": "2025-09-18T21:19:23.010185",
+    "assigned_to": "Eva Davis",
+    "resolution": "Problem fixed by adjusting network settings and clearing cache."
+  },
+  {
+    "title": "File permissions issue - cannot edit shared documents",
+    "description": "I can open shared documents in our team folder but cannot edit or save changes. I get a 'Permission denied' error when trying to save. I had edit permissions last month but something seems to have changed.",
+    "category": "Access",
+    "priority": "medium",
+    "status": "in_progress",
+    "user_id": "USR16695",
+    "user_email": "kevin.hall@company.com",
+    "user_name": "Kevin Hall",
+    "department": "Product Management",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Access' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-10T12:19:23.010193",
+    "updated_at": "2025-10-10T12:19:23.010193",
+    "assigned_to": "Bob Smith"
+  },
+  {
+    "title": "Email not syncing with mobile device",
+    "description": "My work emails are not syncing with my company phone. I receive emails on my desktop but they don't show up on my mobile device. I've tried removing and re-adding the account but the issue persists. The sync was working fine until yesterday.",
+    "category": "Email",
+    "priority": "medium",
+    "status": "open",
+    "user_id": "USR84097",
+    "user_email": "andrew.green@company.com",
+    "user_name": "Andrew Green",
+    "department": "HR",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Email' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-25T14:19:23.010198",
+    "updated_at": "2025-09-25T14:19:23.010198"
+  },
+  {
+    "title": "Blue Screen of Death (BSOD) occurring randomly",
+    "description": "My computer has been experiencing Blue Screen of Death errors randomly throughout the day. There's no specific pattern - it happens when I'm using different applications. The error code is usually SYSTEM_SERVICE_EXCEPTION. This is affecting my ability to work.",
+    "category": "Other",
+    "priority": "critical",
+    "status": "open",
+    "user_id": "USR18981",
+    "user_email": "jennifer.martinez@company.com",
+    "user_name": "Jennifer Martinez",
+    "department": "Finance",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Other' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-10T13:19:23.010203",
+    "updated_at": "2025-10-10T13:19:23.010203"
+  },
+  {
+    "title": "Software update stuck at 50% - system unusable",
+    "description": "A Windows update started this morning and has been stuck at 50% for over 3 hours. I cannot cancel it or use my computer. I have important work to complete today and need this resolved urgently.",
+    "category": "Software",
+    "priority": "critical",
+    "status": "resolved",
+    "user_id": "USR79754",
+    "user_email": "christopher.harris@company.com",
+    "user_name": "Christopher Harris",
+    "department": "Customer Support",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Software' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-20T20:19:23.010209",
+    "updated_at": "2025-09-21T17:19:23.010209",
+    "assigned_to": "Carol Williams",
+    "resolution": "Issue resolved through hardware replacement and configuration update."
+  },
+  {
+    "title": "VPN connection very slow - remote work impacted",
+    "description": "When I connect to the company VPN, my internet speed drops significantly. File transfers that normally take minutes are taking hours. This is making remote work very difficult, especially when accessing cloud applications.",
+    "category": "Network",
+    "priority": "high",
+    "status": "resolved",
+    "user_id": "USR39123",
+    "user_email": "michael.chen@company.com",
+    "user_name": "Michael Chen",
+    "department": "Finance",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Network' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-10-09T23:19:23.010216",
+    "updated_at": "2025-10-11T04:19:23.010216",
+    "assigned_to": "Alice Johnson",
+    "resolution": "Resolved by reinstalling the application and configuring permissions."
+  },
+  {
+    "title": "Request deactivation of former employee accounts",
+    "description": "We need to deactivate all system accounts for John Doe who left the company last Friday. This includes Active Directory, email, VPN access, and any application-specific accounts. His employee ID was EMP005678. Please confirm when this is completed.",
+    "category": "Access",
+    "priority": "high",
+    "status": "in_progress",
+    "user_id": "USR56394",
+    "user_email": "christopher.harris@company.com",
+    "user_name": "Christopher Harris",
+    "department": "IT",
+    "attachments": [],
+    "ai_suggestions": [
+      {
+        "type": "category_confidence",
+        "content": "Automatically categorized as 'Access' with 95% confidence",
+        "confidence": 0.95
+      }
+    ],
+    "created_at": "2025-09-20T05:19:23.010226",
+    "updated_at": "2025-09-20T05:19:23.010226",
+    "assigned_to": "Alice Johnson"
   }
 ]

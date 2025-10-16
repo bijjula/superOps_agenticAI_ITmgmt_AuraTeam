@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8002';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001';
 
 // Create axios instance with default configuration
 const api = axios.create({
@@ -92,15 +92,21 @@ export const serviceDeskAPI = {
     return response.data;
   },
 
-  // Categorize ticket using AI
-  categorizeTicket: async (ticketId) => {
-    const response = await api.post(`/service-desk/tickets/${ticketId}/categorize`);
+  // Analyze ticket using AI (categorize + route)
+  analyzeTicket: async (ticketId) => {
+    const response = await api.post(`/api/v1/tickets/${ticketId}/analyze`);
     return response.data;
   },
 
-  // Route ticket using AI
+  // Categorize ticket using AI (legacy - use analyzeTicket instead)
+  categorizeTicket: async (ticketId) => {
+    const response = await api.post(`/api/v1/tickets/${ticketId}/analyze`);
+    return response.data;
+  },
+
+  // Route ticket using AI (legacy - use analyzeTicket instead)
   routeTicket: async (ticketId) => {
-    const response = await api.post(`/service-desk/tickets/${ticketId}/route`);
+    const response = await api.post(`/api/v1/tickets/${ticketId}/analyze`);
     return response.data;
   },
 
