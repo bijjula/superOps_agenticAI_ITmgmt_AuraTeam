@@ -232,6 +232,130 @@ python -m pytest --cov=. --cov-report=html
 2. **API Health**: Check http://localhost:8000/health
 3. **Documentation**: Browse http://localhost:8000/docs
 
+## 🗄️ Database Management
+
+### Viewing MongoDB Records
+
+The application uses MongoDB to store tickets and other data. Here's how to view and interact with the database:
+
+#### Prerequisites
+- Docker containers must be running: `docker-compose up -d`
+- MongoDB container should be accessible as `aura-backend-mongo-1`
+
+#### Basic MongoDB Commands
+
+```bash
+# Navigate to backend directory
+cd aura-backend
+
+# Check if MongoDB container is running
+docker ps | grep mongo
+
+# Connect to MongoDB shell
+docker exec -it aura-backend-mongo-1 mongosh aura_servicedesk
+
+# Or run commands directly without interactive shell
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.countDocuments()"
+```
+
+#### Viewing Tickets
+
+```bash
+# Count total tickets in database
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.countDocuments()"
+
+# View first 5 tickets with basic info
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({}, {title: 1, category: 1, priority: 1, status: 1, user_name: 1}).limit(5).forEach(printjson)"
+
+# View all ticket titles
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({}, {title: 1}).forEach(printjson)"
+
+# Filter tickets by category (e.g., Hardware)
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({category: 'Hardware'}, {title: 1, priority: 1, status: 1}).forEach(printjson)"
+
+# Filter tickets by status (e.g., open)
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({status: 'open'}, {title: 1, category: 1, user_name: 1}).forEach(printjson)"
+
+# Filter tickets by priority (e.g., critical)
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({priority: 'critical'}, {title: 1, description: 1, user_name: 1}).forEach(printjson)"
+```
+
+#### Database Statistics
+
+```bash
+# Get tickets grouped by category
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.aggregate([{\$group: {_id: '\$category', count: {\$sum: 1}}}, {\$sort: {count: -1}}]).forEach(printjson)"
+
+# Get tickets grouped by priority
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.aggregate([{\$group: {_id: '\$priority', count: {\$sum: 1}}}, {\$sort: {count: -1}}]).forEach(printjson)"
+
+# Get tickets grouped by status
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.aggregate([{\$group: {_id: '\$status', count: {\$sum: 1}}}, {\$sort: {count: -1}}]).forEach(printjson)"
+
+# Get tickets grouped by department
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.aggregate([{\$group: {_id: '\$department', count: {\$sum: 1}}}, {\$sort: {count: -1}}]).forEach(printjson)"
+```
+
+#### Advanced Queries
+
+```bash
+# View a complete ticket with all details
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.findOne()"
+
+# Find tickets created in the last 7 days
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({created_at: {\$gte: new Date(Date.now() - 7*24*60*60*1000).toISOString()}}, {title: 1, created_at: 1, user_name: 1}).forEach(printjson)"
+
+# Find tickets assigned to specific agent
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({assigned_to: 'Alice Johnson'}, {title: 1, status: 1, priority: 1}).forEach(printjson)"
+
+# Search tickets by title (case-insensitive)
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.find({title: {\$regex: 'email', \$options: 'i'}}, {title: 1, category: 1, status: 1}).forEach(printjson)"
+```
+
+#### Interactive MongoDB Shell
+
+For more complex operations, you can use the interactive MongoDB shell:
+
+```bash
+# Connect to interactive shell
+docker exec -it aura-backend-mongo-1 mongosh aura_servicedesk
+
+# Once inside the shell, you can run:
+# show collections
+# db.tickets.find().limit(5)
+# db.tickets.find({category: "Hardware"})
+# exit
+```
+
+#### Sample Data Generation
+
+If you need to regenerate or add more sample tickets:
+
+```bash
+# Generate new sample tickets
+cd aura-backend
+python3 generate_simple_tickets.py
+
+# Import the generated tickets
+docker exec -i aura-backend-mongo-1 mongoimport --db aura_servicedesk --collection tickets --jsonArray < sample_tickets.json
+
+# Verify import
+docker exec aura-backend-mongo-1 mongosh aura_servicedesk --eval "db.tickets.countDocuments()"
+```
+
+#### Backup and Restore
+
+```bash
+# Export all tickets to JSON file
+docker exec aura-backend-mongo-1 mongoexport --db aura_servicedesk --collection tickets --out /tmp/tickets_backup.json
+
+# Copy backup from container to host
+docker cp aura-backend-mongo-1:/tmp/tickets_backup.json ./tickets_backup.json
+
+# Restore from backup (drops existing collection)
+docker exec -i aura-backend-mongo-1 mongoimport --db aura_servicedesk --collection tickets --drop --file /tmp/tickets_backup.json
+```
+
 ## 🔍 Troubleshooting
 
 ### Common Issues & Solutions

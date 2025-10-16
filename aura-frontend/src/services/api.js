@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8002';
 
 // Create axios instance with default configuration
 const api = axios.create({
@@ -54,19 +54,19 @@ api.interceptors.response.use(
 export const serviceDeskAPI = {
   // Get all tickets
   getTickets: async (params = {}) => {
-    const response = await api.get('/service-desk/tickets', { params });
+    const response = await api.get('/api/v1/tickets', { params });
     return response.data;
   },
 
   // Get ticket by ID
   getTicket: async (ticketId) => {
-    const response = await api.get(`/service-desk/tickets/${ticketId}`);
+    const response = await api.get(`/api/v1/tickets/${ticketId}`);
     return response.data;
   },
 
   // Create new ticket
   createTicket: async (ticketData) => {
-    const response = await api.post('/service-desk/tickets', ticketData);
+    const response = await api.post('/api/v1/tickets', ticketData);
     return response.data;
   },
 
@@ -315,6 +315,19 @@ export const apiWithFallback = {
       if (isDevelopment) {
         console.warn('API call failed, using mock data:', error.message);
         return { tickets: mockData.tickets, total: mockData.tickets.length };
+      }
+      throw error;
+    }
+  },
+
+  getTicket: async (ticketId) => {
+    try {
+      return await serviceDeskAPI.getTicket(ticketId);
+    } catch (error) {
+      if (isDevelopment) {
+        console.warn('API call failed, using mock data:', error.message);
+        const mockTicket = mockData.tickets.find(t => t.id.toString() === ticketId.toString());
+        return { data: mockTicket || mockData.tickets[0] };
       }
       throw error;
     }

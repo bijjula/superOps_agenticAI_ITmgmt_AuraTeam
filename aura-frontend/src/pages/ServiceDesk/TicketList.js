@@ -53,13 +53,18 @@ const TicketList = () => {
   const loadTickets = async () => {
     try {
       setLoading(true);
-      const response = await apiWithFallback.getTickets();
-      const ticketData = response.tickets || response;
-      setTickets(ticketData);
-      setFilteredTickets(ticketData);
+      // Fetch all tickets by setting a high limit
+      const response = await apiWithFallback.getTickets({ limit: 100 });
+      // Handle paginated API response structure
+      const ticketData = response.items || response.tickets || response || [];
+      setTickets(Array.isArray(ticketData) ? ticketData : []);
+      setFilteredTickets(Array.isArray(ticketData) ? ticketData : []);
     } catch (error) {
       enqueueSnackbar('Failed to load tickets', { variant: 'error' });
       console.error('Load tickets error:', error);
+      // Set empty arrays on error to prevent slice error
+      setTickets([]);
+      setFilteredTickets([]);
     } finally {
       setLoading(false);
     }
