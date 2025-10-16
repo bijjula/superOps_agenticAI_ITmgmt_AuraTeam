@@ -1,0 +1,61 @@
+# 🚀 Backend Implementation Prompt – Aura AI-Powered IT Management Suite
+
+## 📘 Objective
+
+Develop a complete backend application for the **Aura** project using **Python**, **FastAPI**, and **Uvicorn**, structured as a **microservices architecture**. The implementation must strictly follow the specifications outlined in the:
+
+- **FSD (Functional Specification Document)**
+- **PRD (Product Requirement Document)**
+
+---
+
+## 🧱 Architecture Guidelines
+
+- Each **use case** must be implemented as a **separate microservice** using its own **MCPHost**:
+  - `service-desk-host`: for Service Desk Automation
+  - `infra-talent-host`: for Infrastructure & Talent Management
+  - `threat-intel-host`: for Advanced Threat Intelligence
+
+- Each MCPHost should include:
+ - REST API endpoints
+ - Models and schemas
+ - Business logic and services
+ - Prompt templates for OpenAI LLM
+  - Required tools and libraries
+  - Resource definitions (models, schemas, DB connectors)
+  - Prompt templates (for OpenAI LLM interactions)
+
+---
+
+## 🔧 Tech Stack
+
+- **Language**: Python 3.11+
+- **Framework**: FastAPI
+- **Server**: Uvicorn (ASGI)
+- **API Documentation**: Swagger/OpenAPI (auto-generated via FastAPI)
+- **Database**: PostgreSQL or MongoDB CE
+- **Messaging**: RabbitMQ (optional for async workflows)
+- **Authentication**: **Disabled**
+- **CORS**: **Enabled globally** for all origins, methods, and headers
+
+---
+
+## 📌 Implementation Requirements
+
+### ✅ General Setup
+
+- Create a root project directory with subfolders for each microservice.
+- Use Docker and Docker Compose for local development and service orchestration.
+- Configure Uvicorn as the ASGI server for each service.
+- Enable **Swagger/OpenAPI** for every service for API documentation and testing.
+- Globally enable **CORS**:
+  ```python
+  from fastapi.middleware.cors import CORSMiddleware
+
+  app.add_middleware(
+      CORSMiddleware,
+      allow_origins=["*"],
+      allow_credentials=True,
+      allow_methods=["*"],
+      allow_headers=["*"],
+  )
