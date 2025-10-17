@@ -33,6 +33,34 @@ cd aura-backend
 ./start_service_desk.sh
 ```
 
+### Option 3: Python 3.13 Safe Mode (New!)
+If you're using Python 3.13 and encounter dependency compilation issues:
+```bash
+cd aura-backend
+
+# Check compatibility first
+python check_compatibility.py
+
+# Use safe startup with fallback options
+./start_service_desk_safe.sh
+```
+
+### Option 4: Manual Dependency Installation (Troubleshooting)
+For dependency issues or fine-grained control:
+```bash
+cd aura-backend
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Test dependencies first
+python test_dependencies.py
+
+# If issues, use minimal requirements
+pip install -r requirements_minimal.txt
+
+# Or enhanced environment script
+./start_service_desk_with_env.sh
+```
+
 ## Database Setup Instructions
 
 ### 🐘 PostgreSQL Setup
@@ -201,25 +229,111 @@ Once running, the Service Desk Host provides:
 
 ## Troubleshooting
 
-### Database Connection Errors
+### 🐍 Python 3.13 Compatibility Issues
+
+#### Problem: Package Compilation Errors
+```
+ERROR: Cannot install -r requirements.txt because these package versions have conflicting dependencies.
+```
+or
+```
+ModuleNotFoundError: No module named 'sqlalchemy'
+```
+
+**Solutions (in order of preference):**
+
+1. **Use Safe Startup Script:**
+   ```bash
+   cd aura-backend
+   ./start_service_desk_safe.sh
+   ```
+
+2. **Check Compatibility First:**
+   ```bash
+   python check_compatibility.py
+   ```
+
+3. **Use Minimal Requirements:**
+   ```bash
+   source venv/bin/activate
+   pip install -r requirements_minimal.txt
+   python test_dependencies.py
+   ```
+
+4. **Manual Dependency Testing:**
+   ```bash
+   source venv/bin/activate
+   python test_dependencies.py
+   ```
+
+#### Expected Output for Python 3.13 Safe Mode:
+```
+🎫 Starting Aura Service Desk Host (Python 3.13 Safe Mode)...
+🐍 Python version: Python 3.13.x
+📦 Installing dependencies...
+   Step 1: Installing minimal requirements (compatible with Python 3.13)...
+   Step 2: Attempting to install asyncpg (PostgreSQL async driver)...
+   ⚠️  asyncpg failed to install (expected on Python 3.13)
+   Step 3: Installing additional packages...
+✅ Dependencies installation completed
+
+🔍 Testing core dependencies...
+✅ FastAPI
+✅ Uvicorn
+✅ SQLAlchemy
+✅ Motor (MongoDB)
+✅ Redis
+✅ OpenAI
+✅ Pydantic
+
+🎉 All core dependencies are working!
+```
+
+### 📦 Dependency Installation Issues
+
+#### Problem: pymongo/motor Version Conflicts
+```
+ERROR: Cannot install -r requirements.txt (line 11) and pymongo==4.10.1 because these package versions have conflicting dependencies.
+The conflict is caused by:
+    The user requested pymongo==4.10.1
+    motor 3.6.0 depends on pymongo<4.10 and >=4.9
+```
+
+**Solution**: This is now fixed in our requirements files. Update by:
+```bash
+git pull origin main  # Get latest version with fixed dependencies
+pip install -r requirements.txt
+```
+
+#### Problem: AsyncPG Compilation Failure (Python 3.13)
+```
+Building wheel for asyncpg (pyproject.toml) ... error
+```
+
+**Solution**: This is expected on Python 3.13. The safe startup will:
+- Use sync PostgreSQL connections as fallback
+- Maintain full functionality with minimal performance impact
+- Provide clear warnings about limited async features
+
+### 🗄️ Database Connection Errors
 ```
 ❌ PostgreSQL is not running on localhost:5432
 ```
 **Solution**: Start PostgreSQL service using the setup instructions above.
 
-### Missing Environment Variables
+### 🔑 Missing Environment Variables
 ```
 ❌ Missing required environment variables: OPENAI_API_KEY
 ```
 **Solution**: Update your `.env` file with the missing values.
 
-### Import Errors
+### 📁 Import Errors
 ```
 ModuleNotFoundError: No module named 'shared'
 ```
 **Solution**: This is automatically fixed by setting `PYTHONPATH=.` which all scripts do.
 
-### OpenAI API Errors
+### 🤖 OpenAI API Errors
 ```
 OpenAI API error: Invalid API key
 ```
@@ -228,13 +342,40 @@ OpenAI API error: Invalid API key
 2. Check you have credits in your OpenAI account
 3. Ensure the key has proper permissions
 
-### Port Already in Use
+### 🔌 Port Already in Use
 ```
 Address already in use: port 8001
 ```
 **Solution**: Either stop the existing service or change the port in your environment:
 ```env
 PORT=8002
+```
+
+### 🛠️ Emergency Recovery Steps
+
+If nothing works, try the complete reset:
+```bash
+# Stop all processes
+pkill -f "python"
+
+# Clean Python environment
+cd aura-backend
+rm -rf venv
+rm -rf __pycache__
+rm -rf */__pycache__
+
+# Recreate environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Use safe installation
+pip install -r requirements_minimal.txt
+
+# Test dependencies
+python test_dependencies.py
+
+# Start with safe mode
+./start_service_desk_safe.sh
 ```
 
 ## Features

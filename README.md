@@ -121,16 +121,24 @@ Ensure you have the following installed on your system:
 
 ### Required Software
 
-| Software | Version | Installation |
-|----------|---------|--------------|
-| **Python** | 3.8+ | [Download Python](https://python.org/downloads/) |
-| **Node.js** | 16+ | [Download Node.js](https://nodejs.org/) |
-| **npm** | 8+ | Comes with Node.js |
-| **Git** | Latest | [Download Git](https://git-scm.com/) |
+| Software | Version | Installation | Notes |
+|----------|---------|--------------|-------|
+| **Python** | 3.8+ | [Download Python](https://python.org/downloads/) | **Python 3.13 supported** with fallback options |
+| **Node.js** | 16+ | [Download Node.js](https://nodejs.org/) | |
+| **npm** | 8+ | Comes with Node.js | |
+| **Git** | Latest | [Download Git](https://git-scm.com/) | |
 
 ### Optional (for containers)
 - **Docker** 20.10+ - [Download Docker](https://docker.com/get-started)
 - **Docker Compose** 2.0+ - Usually included with Docker Desktop
+
+### Python Version Compatibility
+
+| Python Version | Support Level | Startup Method | Notes |
+|----------------|---------------|----------------|-------|
+| **Python 3.11-3.12** | ✅ **Fully Supported** | Standard scripts | Recommended for development |
+| **Python 3.13+** | ⚠️ **Compatible with Fallbacks** | Safe startup scripts | Some packages may require compilation |
+| **Python 3.8-3.10** | ✅ **Supported** | Standard scripts | Stable but older |
 
 ### Verify Installation
 
@@ -140,7 +148,68 @@ python --version    # Should show Python 3.8+
 node --version      # Should show Node v16+
 npm --version       # Should show npm 8+
 git --version       # Should show git version
+
+# Check Python 3.13 compatibility (if using Python 3.13)
+cd aura-backend
+python check_compatibility.py
 ```
+
+### 🐍 **Python 3.13 Specific Setup**
+
+If you're using Python 3.13, some packages may require compilation. We've provided compatibility solutions:
+
+#### **Recommended Approach for Python 3.13:**
+
+```bash
+# 1. Check compatibility first
+cd aura-backend
+python check_compatibility.py
+
+# 2. Use the safe startup method
+./start_service_desk_safe.sh
+
+# 3. If compilation issues occur, use minimal requirements
+pip install -r requirements_minimal.txt
+```
+
+#### **What the Safe Startup Does:**
+- ✅ **Installs core dependencies** that work reliably on Python 3.13
+- ⚠️ **Attempts asyncpg installation** (may fail - uses sync PostgreSQL fallback)
+- ✅ **Provides clear feedback** on what's working vs. limited
+- ✅ **Maintains full functionality** with performance optimizations where possible
+
+#### **Python 3.13 Compatibility Matrix:**
+
+| Package | Status | Fallback | Notes |
+|---------|--------|----------|-------|
+| **FastAPI** | ✅ Full Support | N/A | Latest version compatible |
+| **Pydantic** | ✅ Full Support | N/A | v2.10.2+ has Python 3.13 wheels |
+| **SQLAlchemy** | ✅ Full Support | N/A | Works with sync and async |
+| **AsyncPG** | ⚠️ May Need Compilation | Sync PostgreSQL | Falls back gracefully |
+| **Motor (MongoDB)** | ✅ Full Support | N/A | Async MongoDB driver works |
+| **Redis** | ✅ Full Support | N/A | Full async support |
+| **OpenAI SDK** | ✅ Full Support | N/A | Latest version compatible |
+
+#### **If You Encounter Issues:**
+
+```bash
+# Option 1: Use our pre-configured safe startup
+cd aura-backend
+./start_service_desk_safe.sh
+
+# Option 2: Manual minimal installation
+cd aura-backend
+source venv/bin/activate
+pip install -r requirements_minimal.txt
+python test_dependencies.py
+
+# Option 3: Alternative Python versions
+# Consider using Python 3.11 or 3.12 for development
+pyenv install 3.12.0  # if using pyenv
+pyenv local 3.12.0
+```
+
+**💡 Pro Tip:** For production deployments with Python 3.13, test thoroughly with our safe startup scripts to ensure all features work as expected.
 
 ## ⚙️ Installation & Setup
 
