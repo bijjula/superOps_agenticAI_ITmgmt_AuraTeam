@@ -30,9 +30,9 @@ logger = logging.getLogger(__name__)
 
 # Service URLs from environment
 SERVICE_URLS = {
-    "service-desk": os.getenv("SERVICE_DESK_URL", "http://service-desk-host:8001"),
-    "infra-talent": os.getenv("INFRA_TALENT_URL", "http://infra-talent-host:8002"),
-    "threat-intel": os.getenv("THREAT_INTEL_URL", "http://threat-intel-host:8003"),
+    "service-desk": os.getenv("SERVICE_DESK_URL", "http://localhost:8001"),
+    "infra-talent": os.getenv("INFRA_TALENT_URL", "http://localhost:8002"),
+    "threat-intel": os.getenv("THREAT_INTEL_URL", "http://localhost:8003"),
 }
 
 
@@ -210,9 +210,19 @@ async def proxy_request(
 
 
 # Service Desk Routes
+@app.api_route("/api/v1/tickets", methods=["GET", "POST"])
+async def service_desk_tickets_root(request: Request):
+    """Proxy to Service Desk - Tickets API (root)"""
+    return await proxy_request(
+        request,
+        SERVICE_URLS["service-desk"],
+        "/api/v1/tickets",
+        request.method
+    )
+
 @app.api_route("/api/v1/tickets/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-async def service_desk_tickets(request: Request, path: str):
-    """Proxy to Service Desk - Tickets API"""
+async def service_desk_tickets_with_path(request: Request, path: str):
+    """Proxy to Service Desk - Tickets API (with path)"""
     return await proxy_request(
         request,
         SERVICE_URLS["service-desk"],
@@ -220,17 +230,25 @@ async def service_desk_tickets(request: Request, path: str):
         request.method
     )
 
+@app.api_route("/api/v1/kb", methods=["GET", "POST"])
+async def service_desk_kb_root(request: Request):
+    """Proxy to Service Desk - Knowledge Base API (root)"""
+    return await proxy_request(
+        request,
+        SERVICE_URLS["service-desk"],
+        "/api/v1/kb",
+        request.method
+    )
 
 @app.api_route("/api/v1/kb/{path:path}", methods=["GET", "POST", "PUT", "DELETE"])
-async def service_desk_kb(request: Request, path: str):
-    """Proxy to Service Desk - Knowledge Base API"""
+async def service_desk_kb_with_path(request: Request, path: str):
+    """Proxy to Service Desk - Knowledge Base API (with path)"""
     return await proxy_request(
         request,
         SERVICE_URLS["service-desk"],
         f"/api/v1/kb/{path}",
         request.method
     )
-
 
 @app.api_route("/api/v1/chatbot/{path:path}", methods=["POST"])
 async def service_desk_chatbot(request: Request, path: str):

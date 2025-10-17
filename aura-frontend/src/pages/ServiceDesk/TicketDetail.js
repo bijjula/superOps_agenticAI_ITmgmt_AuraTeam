@@ -52,7 +52,9 @@ const TicketDetail = () => {
     try {
       setLoading(true);
       const response = await apiWithFallback.getTicket(ticketId);
-      setTicket(response.data);
+      // Handle both API response format (direct ticket) and fallback format (wrapped in data)
+      const ticketData = response.data || response;
+      setTicket(ticketData);
     } catch (error) {
       enqueueSnackbar('Failed to load ticket details', { variant: 'error' });
       console.error('Load ticket error:', error);
@@ -72,7 +74,9 @@ const TicketDetail = () => {
       setAnalyzing(true);
       console.log('Analyzing ticket with ID:', ticketId);
       const response = await serviceDeskAPI.analyzeTicket(ticketId);
-      setAiAnalysis(response.data.analysis);
+      // Handle both API response format (direct analysis) and fallback format (wrapped in data)
+      const analysisData = response.analysis || response.data?.analysis || response;
+      setAiAnalysis(analysisData.analysis || analysisData);
       enqueueSnackbar('AI analysis completed successfully', { variant: 'success' });
     } catch (error) {
       enqueueSnackbar('Failed to analyze ticket with AI', { variant: 'error' });

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001';
+// API Configuration - Use API Gateway as primary endpoint
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
 
 // Create axios instance with default configuration
 const api = axios.create({
@@ -72,13 +72,13 @@ export const serviceDeskAPI = {
 
   // Update ticket
   updateTicket: async (ticketId, updateData) => {
-    const response = await api.put(`/service-desk/tickets/${ticketId}`, updateData);
+    const response = await api.put(`/api/v1/tickets/${ticketId}`, updateData);
     return response.data;
   },
 
   // Assign ticket
   assignTicket: async (ticketId, agentId) => {
-    const response = await api.patch(`/service-desk/tickets/${ticketId}/assign`, {
+    const response = await api.put(`/api/v1/tickets/${ticketId}`, {
       assigned_to: agentId,
     });
     return response.data;
@@ -86,7 +86,7 @@ export const serviceDeskAPI = {
 
   // Update ticket status
   updateTicketStatus: async (ticketId, status) => {
-    const response = await api.patch(`/service-desk/tickets/${ticketId}/status`, {
+    const response = await api.put(`/api/v1/tickets/${ticketId}`, {
       status,
     });
     return response.data;
@@ -112,7 +112,7 @@ export const serviceDeskAPI = {
 
   // Get ticket analytics
   getTicketAnalytics: async (params = {}) => {
-    const response = await api.get('/service-desk/analytics', { params });
+    const response = await api.get('/api/v1/tickets/analytics', { params });
     return response.data;
   },
 };
@@ -121,51 +121,56 @@ export const serviceDeskAPI = {
 export const knowledgeBaseAPI = {
   // Search articles
   searchArticles: async (query, filters = {}) => {
-    const response = await api.get('/knowledge-base/search', {
-      params: { query, ...filters },
-    });
+    const response = await api.post('/api/v1/kb/search', { query, ...filters });
     return response.data;
   },
 
   // Get all articles
   getArticles: async (params = {}) => {
-    const response = await api.get('/knowledge-base/articles', { params });
+    const response = await api.get('/api/v1/kb/articles', { params });
     return response.data;
   },
 
   // Get article by ID
   getArticle: async (articleId) => {
-    const response = await api.get(`/knowledge-base/articles/${articleId}`);
+    const response = await api.get(`/api/v1/kb/articles/${articleId}`);
     return response.data;
   },
 
   // Create new article
   createArticle: async (articleData) => {
-    const response = await api.post('/knowledge-base/articles', articleData);
+    const response = await api.post('/api/v1/kb/articles', articleData);
     return response.data;
   },
 
   // Update article
   updateArticle: async (articleId, updateData) => {
-    const response = await api.put(`/knowledge-base/articles/${articleId}`, updateData);
+    const response = await api.put(`/api/v1/kb/articles/${articleId}`, updateData);
     return response.data;
   },
 
   // Delete article
   deleteArticle: async (articleId) => {
-    const response = await api.delete(`/knowledge-base/articles/${articleId}`);
+    const response = await api.delete(`/api/v1/kb/articles/${articleId}`);
+    return response.data;
+  },
+
+  // Get KB recommendations
+  getRecommendations: async (ticketId = null) => {
+    const params = ticketId ? { ticket_id: ticketId } : {};
+    const response = await api.get('/api/v1/kb/recommendations', { params });
     return response.data;
   },
 
   // Analyze knowledge gaps
   analyzeGaps: async () => {
-    const response = await api.post('/knowledge-base/analyze-gaps');
+    const response = await api.post('/api/v1/kb/analyze-gaps');
     return response.data;
   },
 
   // Generate article suggestions
   generateSuggestions: async (ticketData) => {
-    const response = await api.post('/knowledge-base/generate-suggestions', ticketData);
+    const response = await api.post('/api/v1/kb/generate-suggestions', ticketData);
     return response.data;
   },
 };
@@ -173,35 +178,36 @@ export const knowledgeBaseAPI = {
 // Chatbot API endpoints
 export const chatbotAPI = {
   // Send message to chatbot
-  sendMessage: async (message, sessionId = null) => {
-    const response = await api.post('/chatbot/message', {
+  sendMessage: async (message, userId = null, context = null) => {
+    const response = await api.post('/api/v1/chatbot/message', {
       message,
-      session_id: sessionId,
+      user_id: userId,
+      context: context,
     });
     return response.data;
   },
 
-  // Get chat session
+  // Get chat session (legacy - not implemented in backend)
   getSession: async (sessionId) => {
-    const response = await api.get(`/chatbot/sessions/${sessionId}`);
+    const response = await api.get(`/api/v1/chatbot/sessions/${sessionId}`);
     return response.data;
   },
 
-  // Create new chat session
+  // Create new chat session (legacy - not implemented in backend)
   createSession: async () => {
-    const response = await api.post('/chatbot/sessions');
+    const response = await api.post('/api/v1/chatbot/sessions');
     return response.data;
   },
 
-  // Get chat history
+  // Get chat history (legacy - not implemented in backend)
   getChatHistory: async (sessionId) => {
-    const response = await api.get(`/chatbot/sessions/${sessionId}/history`);
+    const response = await api.get(`/api/v1/chatbot/sessions/${sessionId}/history`);
     return response.data;
   },
 
-  // Clear chat session
+  // Clear chat session (legacy - not implemented in backend)
   clearSession: async (sessionId) => {
-    const response = await api.delete(`/chatbot/sessions/${sessionId}`);
+    const response = await api.delete(`/api/v1/chatbot/sessions/${sessionId}`);
     return response.data;
   },
 };
@@ -210,13 +216,13 @@ export const chatbotAPI = {
 export const dashboardAPI = {
   // Get dashboard overview
   getOverview: async () => {
-    const response = await api.get('/dashboard/overview');
+    const response = await api.get('/api/v1/dashboard/overview');
     return response.data;
   },
 
   // Get ticket metrics
   getTicketMetrics: async (timeRange = '7d') => {
-    const response = await api.get('/dashboard/ticket-metrics', {
+    const response = await api.get('/api/v1/dashboard/ticket-metrics', {
       params: { time_range: timeRange },
     });
     return response.data;
@@ -224,13 +230,13 @@ export const dashboardAPI = {
 
   // Get agent performance
   getAgentPerformance: async () => {
-    const response = await api.get('/dashboard/agent-performance');
+    const response = await api.get('/api/v1/dashboard/agent-performance');
     return response.data;
   },
 
   // Get system health
   getSystemHealth: async () => {
-    const response = await api.get('/dashboard/system-health');
+    const response = await api.get('/health');
     return response.data;
   },
 };

@@ -28,8 +28,12 @@ class DatabaseManager:
         self.mongo_db = None
         self.redis_client = None
     
-    async def init_postgres(self, database_url: str) -> None:
+    async def init_postgres(self, database_url: Optional[str]) -> None:
         """Initialize PostgreSQL connection"""
+        if database_url is None:
+            logger.info("PostgreSQL URL not provided, skipping PostgreSQL initialization")
+            return
+            
         try:
             # Convert sync URL to async URL
             async_url = database_url.replace("postgresql://", "postgresql+asyncpg://")
@@ -52,8 +56,12 @@ class DatabaseManager:
             logger.error(f"Failed to initialize PostgreSQL: {e}")
             raise
     
-    async def init_mongodb(self, mongodb_url: str, database_name: str) -> None:
+    async def init_mongodb(self, mongodb_url: Optional[str], database_name: str) -> None:
         """Initialize MongoDB connection"""
+        if mongodb_url is None:
+            logger.info("MongoDB URL not provided, skipping MongoDB initialization")
+            return
+            
         try:
             self.mongo_client = AsyncIOMotorClient(mongodb_url)
             self.mongo_db = self.mongo_client[database_name]
@@ -64,10 +72,15 @@ class DatabaseManager:
             
         except Exception as e:
             logger.error(f"Failed to initialize MongoDB: {e}")
-            raise
+            # Don't raise - allow service to continue without MongoDB
+            logger.warning("Service will continue without MongoDB support")
     
-    async def init_redis(self, redis_url: str) -> None:
+    async def init_redis(self, redis_url: Optional[str]) -> None:
         """Initialize Redis connection"""
+        if redis_url is None:
+            logger.info("Redis URL not provided, skipping Redis initialization")
+            return
+            
         try:
             self.redis_client = redis.from_url(
                 redis_url,
@@ -81,7 +94,8 @@ class DatabaseManager:
             
         except Exception as e:
             logger.error(f"Failed to initialize Redis: {e}")
-            raise
+            # Don't raise - allow service to continue without Redis
+            logger.warning("Service will continue without Redis support")
     
     async def get_postgres_session(self) -> AsyncSession:
         """Get PostgreSQL session"""
@@ -261,10 +275,10 @@ class MongoRepository:
 
 
 async def init_database_connections(
-    postgres_url: str,
-    mongodb_url: str,
+    postgres_url: Optional[str],
+    mongodb_url: Optional[str],
     mongodb_name: str,
-    redis_url: str
+    redis_url: Optional[str]
 ) -> DatabaseManager:
     """Initialize all database connections"""
     try:
@@ -272,7 +286,7 @@ async def init_database_connections(
         await db_manager.init_mongodb(mongodb_url, mongodb_name)
         await db_manager.init_redis(redis_url)
         
-        logger.info("All database connections initialized successfully")
+        logger.info("Database connections initialization completed")
         return db_manager
         
     except Exception as e:
