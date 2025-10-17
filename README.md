@@ -17,28 +17,60 @@ A comprehensive IT service management platform built with **Python FastAPI micro
 
 ## 🚀 Quick Start
 
-**For impatient developers - get running in 5 minutes:**
+**Get running in 3 minutes with our cross-platform startup scripts:**
+
+### Option 1: Universal Python Scripts (Recommended)
+Works on **Windows, macOS, and Linux** with automatic dependency management:
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/bijjula/superOps_vibecoding.git
 cd superOps_vibecoding
 
-# 2. Backend Setup (Terminal 1)
+# 2. Start API Gateway (Terminal 1)
 cd aura-backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r api-gateway/requirements.txt
-pip install -r service-desk-host/requirements.txt
-python api-gateway/main.py
+python start_api_gateway.py
 
-# 3. Frontend Setup (Terminal 2)
+# 3. Start Service Desk Host (Terminal 2) 
+cd aura-backend
+python start_service_desk.py
+
+# 4. Start Frontend (Terminal 3)
 cd aura-frontend
-npm install
-npm start
+npm install && npm start
 
-# 4. Open http://localhost:3000 in your browser
+# 5. Open http://localhost:3000 in your browser
 ```
+
+### Option 2: Platform-Specific Scripts
+
+#### Windows:
+```cmd
+cd aura-backend
+start_api_gateway.bat          # Terminal 1
+start_service_desk.bat         # Terminal 2
+cd ..\aura-frontend && npm start # Terminal 3
+```
+
+#### Mac/Linux:
+```bash
+cd aura-backend
+./start_api_gateway.sh         # Terminal 1
+./start_service_desk.sh        # Terminal 2
+cd ../aura-frontend && npm start # Terminal 3
+```
+
+### What These Scripts Do Automatically:
+- ✅ **Create virtual environments** (if missing)
+- ✅ **Install Python dependencies** 
+- ✅ **Check database services** (PostgreSQL, MongoDB, Redis)
+- ✅ **Set up environment variables** (creates .env from .env.example)
+- ✅ **Fix import path issues** (PYTHONPATH configuration)
+- ✅ **Provide detailed setup instructions** when services are missing
+
+📖 **Detailed Guides:**
+- **API Gateway**: See [aura-backend/README_STARTUP.md](aura-backend/README_STARTUP.md)
+- **Service Desk Host**: See [aura-backend/README_SERVICE_DESK.md](aura-backend/README_SERVICE_DESK.md)
 
 ## 🏗️ Project Structure
 
