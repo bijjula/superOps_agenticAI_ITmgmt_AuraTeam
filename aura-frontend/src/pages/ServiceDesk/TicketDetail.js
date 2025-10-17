@@ -34,7 +34,7 @@ import {
   Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
-import { apiWithFallback } from '../../services/api';
+import { apiWithFallback, serviceDeskAPI } from '../../services/api';
 import { useSnackbar } from 'notistack';
 
 const TicketDetail = () => {
@@ -63,21 +63,16 @@ const TicketDetail = () => {
 
   // Analyze ticket with AI
   const analyzeTicket = async () => {
+    if (!ticketId) {
+      enqueueSnackbar('No ticket ID available for analysis', { variant: 'error' });
+      return;
+    }
+
     try {
       setAnalyzing(true);
-      const response = await fetch(`http://localhost:8001/api/v1/tickets/${ticketId}/analyze`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to analyze ticket');
-      }
-      
-      const data = await response.json();
-      setAiAnalysis(data.data.analysis);
+      console.log('Analyzing ticket with ID:', ticketId);
+      const response = await serviceDeskAPI.analyzeTicket(ticketId);
+      setAiAnalysis(response.data.analysis);
       enqueueSnackbar('AI analysis completed successfully', { variant: 'success' });
     } catch (error) {
       enqueueSnackbar('Failed to analyze ticket with AI', { variant: 'error' });

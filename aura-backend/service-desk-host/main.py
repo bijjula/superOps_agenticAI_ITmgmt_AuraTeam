@@ -461,7 +461,242 @@ async def categorize_ticket(ticket_id: str):
         
     except HTTPException:
         raise
+    except Exception as e:
+        logger.error(f"Error categorizing ticket: {e}")
         raise HTTPException(status_code=500, detail="Failed to categorize ticket")
+
+
+@app.post("/api/v1/tickets/{ticket_id}/analyze")
+async def analyze_ticket(ticket_id: str):
+    """Comprehensive AI analysis of ticket for routing and recommendations"""
+    
+    try:
+        # Get ticket
+        ticket = await app.state.tickets_repo.find_by_id(ticket_id)
+        if not ticket:
+            raise HTTPException(status_code=404, detail="Ticket not found")
+        
+        # Get AI service
+        ai_service = get_ai_service()
+        
+        # Mock agents for demonstration
+        agents = [
+            {"name": "Sarah Wilson", "skills": ["Network", "Hardware"], "availability": "available"},
+            {"name": "Mike Chen", "skills": ["Software", "Email"], "availability": "busy"},
+            {"name": "Emma Rodriguez", "skills": ["Access", "Security"], "availability": "available"},
+            {"name": "David Kim", "skills": ["Hardware", "Software"], "availability": "available"}
+        ]
+        
+        # Find similar tickets for context
+        similar_tickets = []
+        try:
+            all_tickets = await app.state.tickets_repo.find_many(
+                {"category": ticket.get("category"), "_id": {"$ne": ticket["_id"]}},
+                limit=10
+            )
+            
+            # Simple similarity based on category and keywords
+            ticket_text = f"{ticket.get('title', '')} {ticket.get('description', '')}".lower()
+            for similar in all_tickets:
+                similar_text = f"{similar.get('title', '')} {similar.get('description', '')}".lower()
+                # Basic keyword matching for similarity
+                common_words = set(ticket_text.split()) & set(similar_text.split())
+                if len(common_words) > 2:
+                    similar_tickets.append({
+                        "title": similar.get("title", ""),
+                        "similarity_score": len(common_words) / max(len(ticket_text.split()), len(similar_text.split())),
+                        "resolution_approach": similar.get("resolution", "Standard troubleshooting")
+                    })
+            
+            # Sort by similarity and take top 3
+            similar_tickets.sort(key=lambda x: x["similarity_score"], reverse=True)
+            similar_tickets = similar_tickets[:3]
+            
+        except Exception as e:
+            logger.error(f"Error finding similar tickets: {e}")
+        
+        # Generate comprehensive AI analysis
+        try:
+            analysis_prompt = f"""
+            Analyze this IT support ticket and provide comprehensive recommendations:
+            
+            Ticket Title: {ticket.get('title', '')}
+            Description: {ticket.get('description', '')}
+            Category: {ticket.get('category', '')}
+            Priority: {ticket.get('priority', '')}
+            Department: {ticket.get('department', 'Unknown')}
+            
+            Available Agents:
+            {chr(10).join([f"- {agent['name']}: {', '.join(agent['skills'])} ({agent['availability']})" for agent in agents])}
+            
+            Similar Past Tickets:
+            {chr(10).join([f"- {similar['title']} (similarity: {similar['similarity_score']:.2f})" for similar in similar_tickets]) if similar_tickets else "None found"}
+            
+            Please provide:
+            1. Best agent to assign (with confidence percentage)
+            2. 3-5 self-fix suggestions for the user
+            3. Estimated resolution time
+            4. Priority recommendation
+            5. Any additional insights
+            
+            Format your response as a structured analysis.
+            """
+            
+            ai_response = await ai_service.generate_completion(analysis_prompt, max_tokens=800)
+            
+            # Parse AI response and structure the data
+            response_text = ai_response.response
+            
+            # Find the best available agent based on skills matching
+            ticket_category = ticket.get('category', '').lower()
+            best_agent = None
+            best_confidence = 0
+            
+            for agent in agents:
+                if agent['availability'] == 'available':
+                    skill_match = any(skill.lower() in ticket_category or ticket_category in skill.lower() 
+                                    for skill in agent['skills'])
+                    if skill_match:
+                        confidence = 0.85 if len([s for s in agent['skills'] if s.lower() in ticket_category]) > 0 else 0.70
+                        if confidence > best_confidence:
+                            best_agent = agent
+                            best_confidence = confidence
+            
+            # Fallback to first available agent
+            if not best_agent:
+                available_agents = [a for a in agents if a['availability'] == 'available']
+                if available_agents:
+                    best_agent = available_agents[0]
+                    best_confidence = 0.60
+            
+            # Generate self-fix suggestions based on category
+            self_fix_suggestions = []
+            category = ticket.get('category', '').lower()
+            
+            if 'network' in category:
+                self_fix_suggestions = [
+                    "Check network cable connections",
+                    "Restart your router and modem",
+                    "Run Windows Network Troubleshooter",
+                    "Check if other devices can connect to the network"
+                ]
+            elif 'email' in category:
+                self_fix_suggestions = [
+                    "Check your internet connection",
+                    "Verify email server settings",
+                    "Clear browser cache and cookies",
+                    "Try accessing email from a different device"
+                ]
+            elif 'software' in category:
+                self_fix_suggestions = [
+                    "Restart the application",
+                    "Check for software updates",
+                    "Run the program as administrator",
+                    "Temporarily disable antivirus software"
+                ]
+            elif 'hardware' in category:
+                self_fix_suggestions = [
+                    "Check all cable connections",
+                    "Restart the device",
+                    "Check power supply connections",
+                    "Look for any visible damage or loose parts"
+                ]
+            else:
+                self_fix_suggestions = [
+                    "Restart your computer",
+                    "Check for system updates",
+                    "Try the operation again",
+                    "Document any error messages you see"
+                ]
+            
+            # Estimate resolution time based on priority and category
+            priority = ticket.get('priority', 'medium').lower()
+            if priority == 'critical':
+                resolution_time = "1-2 hours"
+            elif priority == 'high':
+                resolution_time = "4-6 hours"
+            elif priority == 'medium':
+                resolution_time = "1-2 business days"
+            else:
+                resolution_time = "2-3 business days"
+            
+            # Priority recommendation logic
+            if any(word in ticket.get('description', '').lower() for word in ['urgent', 'critical', 'down', 'offline']):
+                priority_recommendation = "Consider upgrading to HIGH priority due to business impact keywords"
+            elif ticket.get('department', '').lower() in ['executive', 'management']:
+                priority_recommendation = "Consider MEDIUM priority for executive department"
+            else:
+                priority_recommendation = f"Current {priority.upper()} priority appears appropriate"
+            
+            # Additional insights
+            additional_insights = []
+            if similar_tickets:
+                additional_insights.append(f"Found {len(similar_tickets)} similar tickets that may provide resolution guidance")
+            if ticket.get('department'):
+                additional_insights.append(f"Department context: {ticket.get('department')} may have specific requirements")
+            if len(ticket.get('description', '')) < 50:
+                additional_insights.append("Ticket description is brief - may need additional information from user")
+            
+            # Structure the analysis response
+            analysis_data = {
+                "suggested_processor": {
+                    "name": best_agent['name'] if best_agent else "No agent available",
+                    "confidence": best_confidence,
+                    "reason": f"Best match for {ticket.get('category', 'this')} category with {best_agent['skills'] if best_agent else []} skills"
+                },
+                "self_fix_suggestions": self_fix_suggestions,
+                "estimated_resolution_time": resolution_time,
+                "priority_recommendation": priority_recommendation,
+                "similar_tickets": similar_tickets,
+                "additional_insights": additional_insights,
+                "ai_analysis_text": response_text
+            }
+            
+            logger.info(f"AI analysis completed for ticket {ticket_id}")
+            
+            return BaseResponse(
+                message="Ticket analysis completed successfully",
+                data={
+                    "ticket_id": ticket_id,
+                    "analysis": analysis_data
+                }
+            )
+            
+        except Exception as e:
+            logger.error(f"AI analysis failed: {e}")
+            # Provide fallback analysis
+            fallback_analysis = {
+                "suggested_processor": {
+                    "name": "General Support Agent",
+                    "confidence": 0.5,
+                    "reason": "AI analysis unavailable - defaulting to general support"
+                },
+                "self_fix_suggestions": [
+                    "Restart your computer",
+                    "Check for updates",
+                    "Try the operation again",
+                    "Contact IT support if issue persists"
+                ],
+                "estimated_resolution_time": "1-2 business days",
+                "priority_recommendation": "Current priority level appears appropriate",
+                "similar_tickets": [],
+                "additional_insights": ["AI analysis temporarily unavailable"],
+                "ai_analysis_text": "Fallback analysis provided due to AI service unavailability"
+            }
+            
+            return BaseResponse(
+                message="Ticket analysis completed with fallback data",
+                data={
+                    "ticket_id": ticket_id,
+                    "analysis": fallback_analysis
+                }
+            )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error analyzing ticket {ticket_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to analyze ticket")
 
 
 # Knowledge Base APIs
