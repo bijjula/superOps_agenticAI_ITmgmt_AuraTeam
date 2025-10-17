@@ -28,7 +28,9 @@ export PYTHONPATH=$(pwd):$PYTHONPATH
 # Load environment variables from .env file
 if [ -f ".env" ]; then
     echo "🔧 Loading environment variables from .env file..."
-    export $(grep -v '^#' .env | xargs)
+    set -a  # automatically export all variables
+    source .env
+    set +a  # stop automatically exporting
 else
     echo "❌ .env file not found!"
     exit 1
