@@ -18,6 +18,10 @@ fi
 echo "📦 Activating virtual environment..."
 source venv/bin/activate
 
+# Install/update dependencies
+echo "📦 Installing dependencies..."
+pip install -r service-desk-host/requirements.txt > /dev/null 2>&1
+
 # Set Python path
 export PYTHONPATH=$(pwd):$PYTHONPATH
 
