@@ -37,9 +37,7 @@ class DatabaseManager:
             self.postgres_engine = create_async_engine(
                 async_url,
                 echo=False,
-                poolclass=StaticPool,
-                pool_size=20,
-                max_overflow=0
+                poolclass=StaticPool
             )
             
             self.postgres_session = sessionmaker(
@@ -93,7 +91,7 @@ class DatabaseManager:
     
     def get_mongo_db(self):
         """Get MongoDB database"""
-        if not self.mongo_db:
+        if self.mongo_db is None:
             raise RuntimeError("MongoDB not initialized")
         return self.mongo_db
     
