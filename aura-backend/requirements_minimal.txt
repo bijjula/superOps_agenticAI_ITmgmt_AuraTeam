@@ -7,7 +7,7 @@ uvicorn>=0.20.0
 python-multipart>=0.0.6
 
 # Basic database support (without async PostgreSQL for now)
-pymongo>=4.0.0
+pymongo>=4.5.0,<4.10.0  # Compatible with motor version constraints
 motor>=3.0.0
 redis>=4.0.0
 

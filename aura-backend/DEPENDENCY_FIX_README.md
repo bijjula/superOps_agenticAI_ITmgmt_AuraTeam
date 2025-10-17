@@ -10,7 +10,9 @@ The service desk host was failing to start with multiple issues:
 1. **Missing Dependencies**: The root `aura-backend/requirements.txt` was missing several critical dependencies
 2. **Python 3.13 Compatibility**: Many packages didn't have pre-built wheels for Python 3.13, causing compilation failures
 3. **Hidden Installation Errors**: The startup script was hiding installation failures
-4. **Version Conflicts**: Older package versions were incompatible with Python 3.13
+4. **Version Conflicts**: Multiple compatibility issues:
+   - Older package versions were incompatible with Python 3.13
+   - `pymongo==4.10.1` conflicted with `motor==3.6.0` (requires `pymongo<4.10`)
 
 ## Solutions Implemented
 

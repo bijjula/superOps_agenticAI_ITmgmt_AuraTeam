@@ -7,6 +7,7 @@ uvicorn[standard]==0.32.0
 # Database drivers
 asyncpg==0.30.0  # PostgreSQL async driver - Python 3.13 compatible
 motor==3.6.0
+pymongo==4.9.1  # Compatible with motor 3.6.0 (requires <4.10)
 redis==5.2.0  # Without hiredis for compatibility
 
 # ODM/ORM
