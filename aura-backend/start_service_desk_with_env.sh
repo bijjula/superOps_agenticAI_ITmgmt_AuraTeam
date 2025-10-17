@@ -20,7 +20,28 @@ source venv/bin/activate
 
 # Install/update dependencies
 echo "📦 Installing dependencies..."
-pip install -r service-desk-host/requirements.txt > /dev/null 2>&1
+echo "   Installing from root requirements.txt..."
+pip install -r requirements.txt
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to install root dependencies"
+    exit 1
+fi
+
+echo "   Installing service-desk-host specific requirements..."
+pip install -r service-desk-host/requirements.txt
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to install service-desk-host dependencies"
+    exit 1
+fi
+echo "✅ All dependencies installed successfully"
+
+# Test dependencies
+echo "🔍 Testing dependencies..."
+python test_dependencies.py
+if [ $? -ne 0 ]; then
+    echo "❌ Dependency test failed"
+    exit 1
+fi
 
 # Set Python path
 export PYTHONPATH=$(pwd):$PYTHONPATH
