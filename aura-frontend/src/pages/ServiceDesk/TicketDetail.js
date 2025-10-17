@@ -136,7 +136,7 @@ const TicketDetail = () => {
         </IconButton>
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h4" sx={{ fontWeight: 600 }}>
-            Ticket #{ticket.id}
+            Ticket #{ticketId}
           </Typography>
           <Typography variant="h6" color="text.secondary">
             {ticket.title}

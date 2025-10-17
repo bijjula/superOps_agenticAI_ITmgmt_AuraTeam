@@ -310,15 +310,15 @@ const TicketList = () => {
             <TableBody>
               {paginatedTickets.map((ticket) => (
                 <TableRow
-                  key={ticket.id}
+                  key={ticket._id || ticket.id}
                   hover
                   sx={{ cursor: 'pointer' }}
-                  onClick={() => navigate(`/tickets/${ticket.id}`)}
+                  onClick={() => navigate(`/tickets/${ticket._id || ticket.id}`)}
                 >
                   <TableCell>
                     <Box>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                        #{ticket.id || 'N/A'} {ticket.title || 'Untitled'}
+                        #{ticket._id || ticket.id || 'N/A'} {ticket.title || 'Untitled'}
                       </Typography>
                       <Typography variant="body2" color="text.secondary" className="text-ellipsis" sx={{ maxWidth: 300 }}>
                         {ticket.description || 'No description'}
@@ -389,7 +389,7 @@ const TicketList = () => {
                         size="small"
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(`/tickets/${ticket.id}`);
+                          navigate(`/tickets/${ticket._id || ticket.id}`);
                         }}
                       >
                         <ArrowForwardIcon />

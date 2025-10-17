@@ -333,7 +333,29 @@ export const apiWithFallback = {
       if (isDevelopment) {
         console.warn('API call failed, using mock data:', error.message);
         const mockTicket = mockData.tickets.find(t => t.id.toString() === ticketId.toString());
-        return { data: mockTicket || mockData.tickets[0] };
+        if (mockTicket) {
+          return { data: mockTicket };
+        } else {
+          // Create a mock ticket with the requested ID
+          return { 
+            data: {
+              id: ticketId,
+              _id: ticketId,
+              title: `Sample Ticket ${ticketId}`,
+              description: `This is a mock ticket with ID ${ticketId} for testing purposes.`,
+              status: 'open',
+              priority: 'medium',
+              category: 'General',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
+              assigned_to: null,
+              requester: 'test.user@company.com',
+              user_name: 'Test User',
+              user_email: 'test.user@company.com',
+              department: 'IT'
+            }
+          };
+        }
       }
       throw error;
     }
