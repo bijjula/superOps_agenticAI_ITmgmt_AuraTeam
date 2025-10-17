@@ -165,17 +165,17 @@ const TicketDetail = () => {
             <CardContent>
               <Box sx={{ display: 'flex', gap: 1, mb: 3, flexWrap: 'wrap' }}>
                 <Chip
-                  label={ticket.status.replace('_', ' ').toUpperCase()}
+                  label={(ticket.status || 'unknown').replace('_', ' ').toUpperCase()}
                   color={getStatusColor(ticket.status)}
                   variant="filled"
                 />
                 <Chip
-                  label={ticket.priority.toUpperCase()}
+                  label={(ticket.priority || 'unknown').toUpperCase()}
                   color={getPriorityColor(ticket.priority)}
                   variant="outlined"
                 />
                 <Chip
-                  label={ticket.category}
+                  label={ticket.category || 'Uncategorized'}
                   icon={<CategoryIcon />}
                   variant="outlined"
                 />
@@ -185,7 +185,7 @@ const TicketDetail = () => {
                 Description
               </Typography>
               <Typography variant="body1" sx={{ mb: 3, whiteSpace: 'pre-wrap' }}>
-                {ticket.description}
+                {ticket.description || 'No description provided'}
               </Typography>
 
               <Divider sx={{ my: 3 }} />
@@ -197,14 +197,14 @@ const TicketDetail = () => {
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
                     <Avatar sx={{ width: 32, height: 32 }}>
-                      {ticket.user_name?.charAt(0) || ticket.requester?.charAt(0) || 'U'}
+                      {(ticket.user_name || ticket.requester || 'Unknown').charAt(0)}
                     </Avatar>
                     <Box>
                       <Typography variant="body2">
-                        {ticket.user_name || ticket.requester}
+                        {ticket.user_name || ticket.requester || 'Unknown'}
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        {ticket.user_email || ticket.requester}
+                        {ticket.user_email || ticket.requester || 'No email'}
                       </Typography>
                     </Box>
                   </Box>
@@ -222,7 +222,7 @@ const TicketDetail = () => {
                     Created At
                   </Typography>
                   <Typography variant="body2" sx={{ mt: 1 }}>
-                    {formatDateTime(ticket.created_at)}
+                    {ticket.created_at ? formatDateTime(ticket.created_at) : 'Unknown'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -230,7 +230,7 @@ const TicketDetail = () => {
                     Last Updated
                   </Typography>
                   <Typography variant="body2" sx={{ mt: 1 }}>
-                    {formatDateTime(ticket.updated_at)}
+                    {ticket.updated_at ? formatDateTime(ticket.updated_at) : 'Unknown'}
                   </Typography>
                 </Grid>
               </Grid>
@@ -302,7 +302,7 @@ const TicketDetail = () => {
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                       <Avatar sx={{ width: 24, height: 24, fontSize: '0.75rem' }}>
-                        {aiAnalysis.suggested_processor.name?.charAt(0)}
+                        {(aiAnalysis.suggested_processor?.name || 'U').charAt(0)}
                       </Avatar>
                       <Typography variant="body2" sx={{ fontWeight: 600 }}>
                         {aiAnalysis.suggested_processor.name}

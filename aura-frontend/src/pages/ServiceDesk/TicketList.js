@@ -81,20 +81,20 @@ const TicketList = () => {
     // Search filter
     if (searchTerm) {
       filtered = filtered.filter(ticket =>
-        ticket.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ticket.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        ticket.requester.toLowerCase().includes(searchTerm.toLowerCase())
+        (ticket.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (ticket.description || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (ticket.requester || ticket.user_email || ticket.user_name || '').toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     // Status filter
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(ticket => ticket.status === statusFilter);
+      filtered = filtered.filter(ticket => ticket.status && ticket.status === statusFilter);
     }
 
     // Priority filter
     if (priorityFilter !== 'all') {
-      filtered = filtered.filter(ticket => ticket.priority === priorityFilter);
+      filtered = filtered.filter(ticket => ticket.priority && ticket.priority === priorityFilter);
     }
 
     setFilteredTickets(filtered);
@@ -200,7 +200,7 @@ const TicketList = () => {
           <Card>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" sx={{ fontWeight: 600, color: 'warning.main' }}>
-                {tickets.filter(t => t.status === 'open').length}
+                {tickets.filter(t => t.status && t.status === 'open').length}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Open Tickets
@@ -212,7 +212,7 @@ const TicketList = () => {
           <Card>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" sx={{ fontWeight: 600, color: 'info.main' }}>
-                {tickets.filter(t => t.status === 'in_progress').length}
+                {tickets.filter(t => t.status && t.status === 'in_progress').length}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 In Progress
@@ -224,7 +224,7 @@ const TicketList = () => {
           <Card>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" sx={{ fontWeight: 600, color: 'success.main' }}>
-                {tickets.filter(t => t.status === 'resolved').length}
+                {tickets.filter(t => t.status && t.status === 'resolved').length}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Resolved
@@ -318,10 +318,10 @@ const TicketList = () => {
                   <TableCell>
                     <Box>
                       <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                        #{ticket.id} {ticket.title}
+                        #{ticket.id || 'N/A'} {ticket.title || 'Untitled'}
                       </Typography>
                       <Typography variant="body2" color="text.secondary" className="text-ellipsis" sx={{ maxWidth: 300 }}>
-                        {ticket.description}
+                        {ticket.description || 'No description'}
                       </Typography>
                       {ticket.category && (
                         <Chip
@@ -335,7 +335,7 @@ const TicketList = () => {
                   </TableCell>
                   <TableCell>
                     <Chip
-                      label={ticket.status.replace('_', ' ').toUpperCase()}
+                      label={(ticket.status || 'unknown').replace('_', ' ').toUpperCase()}
                       color={getStatusColor(ticket.status)}
                       size="small"
                       variant="filled"
@@ -343,7 +343,7 @@ const TicketList = () => {
                   </TableCell>
                   <TableCell>
                     <Chip
-                      label={ticket.priority.toUpperCase()}
+                      label={(ticket.priority || 'unknown').toUpperCase()}
                       color={getPriorityColor(ticket.priority)}
                       size="small"
                       variant="outlined"
@@ -352,10 +352,10 @@ const TicketList = () => {
                   <TableCell>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <Avatar sx={{ width: 24, height: 24, fontSize: '0.75rem' }}>
-                        {ticket.requester.charAt(0).toUpperCase()}
+                        {(ticket.requester || ticket.user_email || ticket.user_name || 'U').charAt(0).toUpperCase()}
                       </Avatar>
                       <Typography variant="body2">
-                        {ticket.requester.split('@')[0]}
+                        {(ticket.requester || ticket.user_email || ticket.user_name || 'Unknown').split('@')[0]}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -376,10 +376,10 @@ const TicketList = () => {
                   <TableCell>
                     <Box>
                       <Typography variant="body2">
-                        {formatDateTime(ticket.created_at)}
+                        {ticket.created_at ? formatDateTime(ticket.created_at) : 'Unknown'}
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        {getTimeAgo(ticket.created_at)}
+                        {ticket.created_at ? getTimeAgo(ticket.created_at) : 'N/A'}
                       </Typography>
                     </Box>
                   </TableCell>
